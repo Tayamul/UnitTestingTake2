@@ -15,4 +15,22 @@ class TaxCalculatorSpec extends AnyWordSpec {
       }
     }
   }
+
+  "TaxCalculator.calculateTax" should {
+    "return the total amount of tax to pay" when {
+      "the income is below the basic rate, but above the personal allowance" in {
+        val result: Double = taxCalculator.calculateTax(25000)
+        assert(result == (25000 * 0.2)) // is there a way to refer to the 'basicRate' variable?
+      }
+    }
+  }
+
+  "TaxCalculator.calculateTax" should {
+    "return the total amount of tax to pay" when {
+      "the employee is on a higher tax bracket" in {
+        val result: Double = taxCalculator.calculateTax(100000)
+        assert(result == (100000 * 0.4))
+      }
+    }
+  }
 }
