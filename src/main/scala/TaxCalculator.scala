@@ -13,12 +13,11 @@ class TaxCalculator {
 
   // A method to calculate the total amount of tax to be paid, returned as a double
   def calculateTax(income: Double): Double = {
-    if (income <= personalAllowance) income * personalAllowanceRate
-    else if (income <= basicRateLimit) income * basicRate
-    else if (income <= higherRateLimit) income * higherRate
-    else if (income >= higherRateLimit) income * additionalRate
-    else 404
-
+    if (income <= 0) 404
+    else if (income <= personalAllowance) income * personalAllowanceRate
+    else if (income <= basicRateLimit) (income - personalAllowance) * basicRate
+    else if (income <= higherRateLimit) (((basicRateLimit - personalAllowance) * basicRate ) + ((income - basicRateLimit) * higherRate))
+    else (((basicRateLimit - personalAllowance) * basicRate) + ((higherRateLimit - basicRateLimit) * higherRate) + ((income - higherRateLimit) * additionalRate))
   }
 
   // A method which can tell you if someone is a higher rate taxpayer
