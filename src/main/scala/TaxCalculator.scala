@@ -22,7 +22,7 @@ class TaxCalculator {
 
   // A method which can tell you if someone is a higher rate taxpayer
   def isHigherRateTaxpayer(income: Double): Boolean = {
-    ???
+    income >= basicRateLimit && income <= higherRateLimit
   }
 
   // A method that will return a string with the income limit of their current tax band.

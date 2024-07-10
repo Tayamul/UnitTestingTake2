@@ -80,4 +80,63 @@ class TaxCalculatorSpec extends AnyWordSpec {
       }
     }
   }
+
+  "TaxCalculator.isHigherRateTaxpayer" should {
+    "return a true value" when {
+      "the employee pays a higher tax rate" in {
+        val income = 75000
+        val result: Boolean = taxCalculator.isHigherRateTaxpayer(income)
+        assert(result)
+      }
+    }
+    "return a false value" when {
+      "the employee does not pay a higher tax rate" in {
+        val income = 30000
+        val result: Boolean = taxCalculator.isHigherRateTaxpayer(income)
+        assert(!result)
+      }
+    }
+    "return a true value" when {
+      "the employee's pay is exactly at the higher rate limit" in {
+        val income = 125000
+        val result: Boolean = taxCalculator.isHigherRateTaxpayer(income)
+        assert(result)
+      }
+    }
+    "return a true value" when {
+      "the employee's pay is just above the basic rate limit" in {
+        val income = 50001
+        val result: Boolean = taxCalculator.isHigherRateTaxpayer(income)
+        assert(result)
+      }
+    }
+    "return a true value" when {
+      "the employee's pay is just below the additional rate limit" in {
+        val income = 124999
+        val result: Boolean = taxCalculator.isHigherRateTaxpayer(income)
+        assert(result)
+      }
+    }
+    "return a false value" when {
+      "the employee pays an additional tax rate" in {
+        val income = 195000
+        val result: Boolean = taxCalculator.isHigherRateTaxpayer(income)
+        assert(!result)
+      }
+    }
+    "return a false value" when {
+      "the input is 0" in {
+        val income = 0
+        val result: Boolean = taxCalculator.isHigherRateTaxpayer(income)
+        assert(!result)
+      }
+    }
+    "return a false value" when {
+      "the input is a negative integer" in {
+        val income = -50000
+        val result: Boolean = taxCalculator.isHigherRateTaxpayer(income)
+        assert(!result)
+      }
+    }
+  }
 }
