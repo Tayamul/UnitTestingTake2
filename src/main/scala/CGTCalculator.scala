@@ -7,7 +7,7 @@ class CGTCalculator {
   private val annualIncomeThreshold: Double = 50270
 
   def calculateCGT (income: Double, capitalGains: Double): Double = {
-    if (capitalGains <= 3000 && capitalGains > 0) 0
+    if (capitalGains <= 3000) 0
     else if (income <= annualIncomeThreshold) (capitalGains - cgtAllowance) * cgtLowerRate
     else if (income >= annualIncomeThreshold) (capitalGains - cgtAllowance) * cgtHigherRate
     else 404
